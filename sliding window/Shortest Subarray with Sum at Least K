@@ -1,0 +1,19 @@
+from collections import deque
+
+class Solution:
+    def shortestSubarray(self, nums: list[int], k: int) -> int:
+        prefix_sum = [0] * (len(nums) + 1)
+        for i in range(len(nums)):
+            prefix_sum[i + 1] = prefix_sum[i] + nums[i]
+        
+        result = float('inf')
+        dq = deque()
+        
+        for i in range(len(prefix_sum)):
+            while dq and prefix_sum[i] - prefix_sum[dq[0]] >= k:
+                result = min(result, i - dq.popleft())
+            while dq and prefix_sum[i] <= prefix_sum[dq[-1]]:
+                dq.pop()
+            dq.append(i)
+        
+        return result if result != float('inf') else -1

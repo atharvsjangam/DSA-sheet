@@ -1,0 +1,21 @@
+class Solution:
+    def countGoodSubstrings(self, s: str) -> int:
+        count = 0
+        
+        # Iterate through the string to check each substring of size 3
+        for i in range(len(s) - 2):
+            # Extract the substring of length 3
+            substring = s[i:i+3]
+            
+            # Check if all characters in the substring are distinct
+            if len(set(substring)) == 3:
+                count += 1
+        
+        return count
+
+# Example usage
+if __name__ == "__main__":
+    s = "aababcabc"
+    solution = Solution()
+    result = solution.countGoodSubstrings(s)
+    print("Number of good substrings:", result)

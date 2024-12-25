@@ -1,0 +1,17 @@
+class Solution:
+    def maxSumTwoNoOverlap(self, nums: list[int], firstLen: int, secondLen: int) -> int:
+        def maxSum(L: int, R: int) -> int:
+            maxL = 0
+            sumL = sum(nums[:L])
+            sumR = sum(nums[L:L+R])
+            maxSum = sumL + sumR
+            
+            for i in range(L + R, len(nums)):
+                sumL += nums[i - R] - nums[i - R - L]
+                sumR += nums[i] - nums[i - R]
+                maxL = max(maxL, sumL)
+                maxSum = max(maxSum, maxL + sumR)
+            
+            return maxSum
+        
+        return max(maxSum(firstLen, secondLen), maxSum(secondLen, firstLen))

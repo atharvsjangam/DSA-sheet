@@ -1,0 +1,15 @@
+class Solution:
+    def countStudents(self, students: list[int], sandwiches: list[int]) -> int:
+        student_queue = {0: 0, 1: 0}
+        for student in students:
+            student_queue[student] += 1
+        
+        for sandwich in sandwiches:
+            if student_queue[sandwich] > 0:
+                student_queue[sandwich] -= 1
+            else:
+                student_queue[1 - sandwich] -= 1
+                if student_queue[1 - sandwich] < 0:
+                    return student_queue[0] + student_queue[1]
+        
+        return 0

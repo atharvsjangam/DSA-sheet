@@ -1,0 +1,12 @@
+def containsNearbyDuplicate(nums, k):
+    # Dictionary to store the value and its index
+    index_map = {}
+
+    # Iterate over the array
+    for i, num in enumerate(nums):
+        if num in index_map and i - index_map[num] <= k:
+            return True
+        # Update the index of the number in the map
+        index_map[num] = i
+
+    return False

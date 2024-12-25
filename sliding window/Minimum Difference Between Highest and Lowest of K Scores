@@ -1,0 +1,29 @@
+from typing import List
+
+
+class Solution:
+    def minimumDifference(self, nums: List[int], k: int) -> int:
+        # If k is 1, the difference will always be 0 because a single element has no range
+        if k == 1:
+            return 0
+        
+        # Sort the array to easily find the minimum difference
+        nums.sort()
+        
+        min_diff = float('inf')
+        
+        # Iterate through the sorted array and find the minimum difference between
+        # the highest and lowest values in any window of size k
+        for i in range(len(nums) - k + 1):
+            diff = nums[i + k - 1] - nums[i]
+            min_diff = min(min_diff, diff)
+        
+        return min_diff
+
+# Example usage
+if __name__ == "__main__":
+    nums = [90, 85, 70, 80, 60, 75, 85]
+    k = 3
+    solution = Solution()
+    result = solution.minimumDifference(nums, k)
+    print("Minimum difference:", result)

@@ -1,0 +1,26 @@
+class Solution:
+    def minRecolors(self, blocks: str, k: int) -> int:
+        # Initialize the count of white blocks in the first window of size k
+        white_count = blocks[:k].count('W')
+        min_recolors = white_count
+        
+        # Slide the window across the blocks
+        for i in range(1, len(blocks) - k + 1):
+            # Slide the window by removing the leftmost character and adding the next character
+            if blocks[i - 1] == 'W':
+                white_count -= 1
+            if blocks[i + k - 1] == 'W':
+                white_count += 1
+            
+            # Update the minimum recolors needed
+            min_recolors = min(min_recolors, white_count)
+        
+        return min_recolors
+
+# Example usage
+if __name__ == "__main__":
+    blocks = "WBBWWBBWBW"
+    k = 3
+    solution = Solution()
+    result = solution.minRecolors(blocks, k)
+    print("Minimum recolors:", result)

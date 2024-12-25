@@ -1,0 +1,22 @@
+class Solution:
+    def kBeauty(self, num: int, k: int) -> int:
+        num_str = str(num)
+        count = 0
+        
+        # Loop through the number's string representation to extract all substrings of length k
+        for i in range(len(num_str) - k + 1):
+            substring = num_str[i:i+k]
+            
+            # Convert the substring to an integer and check if it divides the number
+            if int(substring) != 0 and num % int(substring) == 0:
+                count += 1
+        
+        return count
+
+# Example usage
+if __name__ == "__main__":
+    num = 240
+    k = 2
+    solution = Solution()
+    result = solution.kBeauty(num, k)
+    print("K-Beauty of the number:", result)
