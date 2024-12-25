@@ -1,0 +1,9 @@
+class Solution:
+    def deckRevealedIncreasing(self, deck: list[int]) -> list[int]:
+        deck.sort()
+        result = []
+        while deck:
+            if result:
+                result.insert(0, result.pop())
+            result.insert(0, deck.pop())
+        return result

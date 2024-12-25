@@ -1,0 +1,20 @@
+class Solution:
+    def movesToStamp(self, stamp: str, target: str) -> list[int]:
+        target = list(target)
+        stamp_len = len(stamp)
+        target_len = len(target)
+        answer = []
+        
+        while True:
+            stamped = False
+            for i in range(target_len - stamp_len + 1):
+                if all(target[i + j] == stamp[j] or target[i + j] == '?' for j in range(stamp_len)):
+                    for j in range(stamp_len):
+                        target[i + j] = '?'
+                    answer.append(i)
+                    stamped = True
+                    break
+            if not stamped:
+                break
+        
+        return answer[::-1] if all(c == '?' for c in target) else []
