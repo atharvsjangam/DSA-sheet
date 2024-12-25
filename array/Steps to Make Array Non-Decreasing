@@ -1,0 +1,26 @@
+from typing import List
+
+
+class Solution:
+    def totalSteps(self, nums: List[int]) -> int:
+        stack = []
+        result = 0
+        
+        for num in nums:
+            steps = 0
+            while stack and stack[-1][0] <= num:
+                steps = max(steps, stack[-1][1])
+                stack.pop()
+            if stack:
+                steps += 1
+            result = max(result, steps)
+            stack.append((num, steps))
+        
+        return result
+
+# Example usage
+if __name__ == "__main__":
+    nums = [5, 3, 4, 4, 2]
+    solution = Solution()
+    result = solution.totalSteps(nums)
+    print("Total steps to make the array non-decreasing:", result)

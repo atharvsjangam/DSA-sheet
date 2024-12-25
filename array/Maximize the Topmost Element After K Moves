@@ -1,0 +1,27 @@
+from typing import List
+
+
+class Solution:
+    def maximizeTop(self, nums: List[int], k: int) -> int:
+        # Case 1: If there are more than 1 move, the topmost element can be changed
+        if k == 0:
+            return nums[0]
+        
+        # Case 2: If there are an odd number of moves left, we can swap the topmost element
+        if k == 1:
+            return max(nums[1], nums[0])
+        
+        # Case 3: If there are more than 1 move left
+        if k >= len(nums):
+            return max(nums)
+        
+        # Case 4: If k is even and there are fewer than the total number of elements
+        return max(nums[k], max(nums[:k]))
+
+# Example usage
+if __name__ == "__main__":
+    nums = [2, 5, 3, 1, 6]
+    k = 4
+    solution = Solution()
+    result = solution.maximizeTop(nums, k)
+    print("Maximum topmost element after k moves:", result)

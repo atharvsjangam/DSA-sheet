@@ -1,0 +1,14 @@
+class Solution:
+    def countHouses(self, street: str) -> int:
+        houses = 0
+        for i in range(len(street)):
+            if street[i] == 'H':
+                houses += 1
+        return houses
+
+# Example usage
+if __name__ == "__main__":
+    street = "H..H.HH."
+    solution = Solution()
+    result = solution.countHouses(street)
+    print("Number of houses:", result)

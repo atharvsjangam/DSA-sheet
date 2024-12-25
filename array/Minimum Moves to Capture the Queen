@@ -1,0 +1,31 @@
+from typing import List
+
+
+class Solution:
+    def minKnightMoves(self, king: List[int], queen: List[int]) -> int:
+        # Directions for 8 possible knight moves
+        directions = [(2, 1), (2, -1), (-2, 1), (-2, -1), (1, 2), (1, -2), (-1, 2), (-1, -2)]
+        visited = set()
+        queue = [(king[0], king[1], 0)]  # (x, y, steps)
+        
+        while queue:
+            x, y, steps = queue.pop(0)
+            
+            if [x, y] == queen:
+                return steps
+            
+            for dx, dy in directions:
+                nx, ny = x + dx, y + dy
+                if 0 <= nx < 8 and 0 <= ny < 8 and (nx, ny) not in visited:
+                    visited.add((nx, ny))
+                    queue.append((nx, ny, steps + 1))
+        
+        return -1
+
+# Example usage
+if __name__ == "__main__":
+    king = [0, 0]
+    queen = [7, 7]
+    solution = Solution()
+    result = solution.minKnightMoves(king, queen)
+    print("Minimum moves to capture the queen:", result)

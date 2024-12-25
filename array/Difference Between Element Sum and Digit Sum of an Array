@@ -1,0 +1,20 @@
+from typing import List
+
+
+class Solution:
+    def differenceOfSum(self, nums: List[int]) -> int:
+        # Calculate element sum (sum of all numbers)
+        element_sum = sum(nums)
+        
+        # Calculate digit sum (sum of all digits of each number)
+        digit_sum = sum(sum(int(digit) for digit in str(num)) for num in nums)
+        
+        # Return the absolute difference between element sum and digit sum
+        return abs(element_sum - digit_sum)
+
+# Example usage
+if __name__ == "__main__":
+    nums = [1, 15, 6, 3]
+    solution = Solution()
+    result = solution.differenceOfSum(nums)
+    print("Difference between element sum and digit sum:", result)

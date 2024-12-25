@@ -1,0 +1,32 @@
+from typing import List
+
+
+class Solution:
+    def maxSquareArea(self, m: int, n: int, fences: List[List[int]]) -> int:
+        # Create a grid to mark where the fences are
+        grid = [[0] * n for _ in range(m)]
+        
+        # Mark the cells where fences are located
+        for x, y in fences:
+            grid[x][y] = 1
+        
+        max_area = 0
+        
+        # Iterate through the grid to find the largest square
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 0:
+                    side = 1
+                    while i + side < m and j + side < n and all(grid[i+k][j+side] == 0 for k in range(side+1)) and all(grid[i+side][j+k] == 0 for k in range(side+1)):
+                        side += 1
+                    max_area = max(max_area, side * side)
+        
+        return max_area
+
+# Example usage
+if __name__ == "__main__":
+    m, n = 5, 5
+    fences = [[0, 1], [1, 1], [2, 1]]
+    solution = Solution()
+    result = solution.maxSquareArea(m, n, fences)
+    print("Maximum square area:", result)

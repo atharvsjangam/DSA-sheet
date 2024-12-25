@@ -1,0 +1,27 @@
+from typing import List
+
+
+class Solution:
+    def minCost(self, s: str, cost: List[int]) -> int:
+        total_cost = 0
+        n = len(s)
+        
+        # Iterate through the string to compare characters at the mirror positions
+        for i in range(n // 2):
+            if s[i] != s[n - 1 - i]:  # If characters are different
+                continue
+            
+            # Find the minimum cost to make them equal
+            if s[i] != s[n - 1 - i]:
+                total_cost += min(cost[i], cost[n - 1 - i])
+        
+        return total_cost
+
+# Example usage
+if __name__ == "__main__":
+    s = "abcde"
+    cost = [1, 2, 3, 4, 5]
+    solution = Solution()
+    result = solution.minCost(s, cost)
+    print("Minimum cost:", result)
+

@@ -1,0 +1,21 @@
+from collections import Counter
+from typing import List
+
+class Solution:
+    def countKDifference(self, nums: List[int], k: int) -> int:
+        count = 0
+        num_count = Counter()
+        
+        for num in nums:
+            count += num_count[num - k] + num_count[num + k]
+            num_count[num] += 1
+        
+        return count
+
+# Example usage
+if __name__ == "__main__":
+    nums = [1, 2, 2, 4]
+    k = 2
+    solution = Solution()
+    result = solution.countKDifference(nums, k)
+    print("Number of pairs with absolute difference k:", result)
