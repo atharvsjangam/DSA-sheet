@@ -1,0 +1,19 @@
+class MyHashSet:
+
+    def __init__(self):
+        self.set = [None] * 1000
+
+    def add(self, key: int) -> None:
+        index = key % 1000
+        if self.set[index] is None:
+            self.set[index] = set()
+        self.set[index].add(key)
+
+    def remove(self, key: int) -> None:
+        index = key % 1000
+        if self.set[index] is not None:
+            self.set[index].discard(key)
+
+    def contains(self, key: int) -> bool:
+        index = key % 1000
+        return self.set[index] is not None and key in self.set[index]
